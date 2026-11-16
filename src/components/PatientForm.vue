@@ -148,78 +148,122 @@ function handleSubmit() {
 
 <template>
   <section>
-    <h2>
+    <h2 class="section-title">
       {{ isEditing ? "Editar Paciente" : "Registrar Paciente" }}
     </h2>
 
     <form @submit.prevent="handleSubmit">
-      <h3>Información Personal</h3>
-      <div>
-        <label>Primer Nombre</label>
-        <input v-model="form.firstName" type="text" required />
+      <section class="form-section">
+        <h3 class="section-title">Información Personal</h3>
+        <div class="form-grid-4">
+          <div class="form-field">
+            <label>Primer Nombre</label>
+            <input v-model="form.firstName" type="text" required />
+          </div>
 
-        <label>Segundo Nombre</label>
-        <input v-model="form.middleName" type="text" />
+          <div class="form-field">
+            <label>Segundo Nombre</label>
+            <input v-model="form.middleName" type="text" />
+          </div>
 
-        <label>Primer Apellido</label>
-        <input v-model="form.firstLastName" type="text" required />
+          <div class="form-field">
+            <label>Primer Apellido</label>
+            <input v-model="form.firstLastName" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Segundo Apellido</label>
+            <input v-model="form.secondLastName" type="text" />
+          </div>
+        </div>
+        <div class="form-grid-4">
+          <div class="form-field">
+            <label>Tipo de identificación</label>
+            <select v-model="form.idType">
+              <option value="CEDULA">Cédula</option>
+              <option value="PASAPORTE">Pasaporte</option>
+              <option value="LICENCIA">Licencia</option>
+              <option value="OTRO">Otro</option>
+            </select>
+          </div>
 
-        <label>Segundo Apellido</label>
-        <input v-model="form.secondLastName" type="text" />
+          <div class="form-field">
+            <label>Número de indentificación</label>
+            <input v-model="form.idNumber" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Fecha de nacimiemto</label>
+            <input v-model="form.birthDate" type="date" required />
+          </div>
+
+          <div class="form-field">
+            <label>Género</label>
+            <select v-model="form.gender">
+              <option value="MASCULINO">Masculino</option>
+              <option value="FEMENINO">Femenino</option>
+              <option value="NO ESPECIFICADO">No especificado</option>
+              <option value="OTRO">Otro</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3 class="section-title">Ubicación y contacto</h3>
+        <div class="form-grid-4">
+          <div class="form-field">
+            <label>País</label>
+            <input v-model="form.country" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Provincia</label>
+            <input v-model="form.stateProvince" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Ciudad</label>
+            <input v-model="form.city" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Dirección</label>
+            <input v-model="form.address" type="text" required />
+          </div>
+        </div>
+        <div class="form-grid-4">
+          <div class="form-field">
+            <label>Teléfono</label>
+            <input v-model="form.phone" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Ocupación</label>
+            <input v-model="form.occupation" type="text" required />
+          </div>
+          <div class="form-field">
+            <label>Nivel educativo</label>
+            <select v-model="form.educationLevel">
+              <option value="PRIMARIA INCOMPLETA">Primaria incompleta</option>
+              <option value="SECUNDARIA INCOMPLETA">
+                Secundaria incompleta
+              </option>
+              <option value="SUPERIOR INCOMPLETA">Superior incompleta</option>
+              <option value="PRIMARIA COMPLETA">Primaria completa</option>
+              <option value="SECUNDARIA COMPLETA">Secundaria completa</option>
+              <option value="SUPERIOR COMPLETA">Superior completa</option>
+              <option value="NINGUNA">Ninguna</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Correo</label>
+            <input v-model="form.email" type="mail" />
+          </div>
+        </div>
+      </section>
+      <div class="actions">
+        <button type="submit" class="btn-success">
+          {{ isEditing ? "Actualizar" : "Guardar" }}
+        </button>
+        <button type="button" class="btn-secondary" @click="emit('cancel')">
+          Cancelar
+        </button>
       </div>
-      <div>
-        <label>Tipo de identificación</label>
-        <select v-model="form.idType">
-          <option value="CEDULA">Cédula</option>
-          <option value="PASAPORTE">Pasaporte</option>
-          <option value="LICENCIA">Licencia</option>
-          <option value="OTRO">Otro</option>
-        </select>
-        <label>Número de indentificación</label>
-        <input v-model="form.idNumber" type="text" required />
-        <label>Fecha de nacimiemto</label>
-        <input v-model="form.birthDate" type="date" required />
-        <label>Género</label>
-        <select v-model="form.gender">
-          <option value="MASCULINO">Masculino</option>
-          <option value="FEMENINO">Femenino</option>
-          <option value="NO ESPECIFICADO">No especificado</option>
-          <option value="OTRO">Otro</option>
-        </select>
-      </div>
-      <h3>Ubicación y contacto</h3>
-      <div>
-        <label>País</label>
-        <input v-model="form.country" type="text" required />
-        <label>Provincia</label>
-        <input v-model="form.stateProvince" type="text" required />
-        <label>Ciudad</label>
-        <input v-model="form.city" type="text" required />
-        <label>Dirección</label>
-        <input v-model="form.address" type="text" required />
-      </div>
-      <div>
-        <label>Teléfono</label>
-        <input v-model="form.phone" type="text" required />
-        <label>Ocupación</label>
-        <input v-model="form.occupation" type="text" required />
-        <label>Nivel educativo</label>
-        <select v-model="form.educationLevel">
-          <option value="PRIMARIA INCOMPLETA">Primaria incompleta</option>
-          <option value="SECUNDARIA INCOMPLETA">Secundaria incompleta</option>
-          <option value="SUPERIOR INCOMPLETA">Superior incompleta</option>
-          <option value="PRIMARIA COMPLETA">Primaria completa</option>
-          <option value="SECUNDARIA COMPLETA">Secundaria completa</option>
-          <option value="SUPERIOR COMPLETA">Superior completa</option>
-          <option value="NINGUNA">Ninguna</option>
-        </select>
-        <label>Correo</label>
-        <input v-model="form.email" type="text" />
-      </div>
-      <button type="submit">
-        {{ isEditing ? "Actualizar" : "Guardar" }}
-      </button>
-      <button type="button" @click="emit('cancel')">Cancelar</button>
     </form>
   </section>
 </template>
